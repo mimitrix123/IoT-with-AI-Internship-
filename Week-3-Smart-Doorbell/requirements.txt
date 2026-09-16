@@ -1,0 +1,6 @@
+Flask>=3.0,<4
+numpy>=1.26,<3
+opencv-python>=4.8,<5
+PyYAML>=6.0,<7
+pytest>=8.0,<9
+requests>=2.31,<3
