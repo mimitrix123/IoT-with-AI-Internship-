@@ -1,6 +1,6 @@
 # IoT with AI Internship
 
-A four-week IoT + AI engineering portfolio. Week 4 is a complete ESP32 smart agriculture platform with sensing, automated irrigation, MQTT cloud telemetry, FreeRTOS multitasking, deep-sleep power management, OTA firmware updates, PCB planning, and a 3D-printable enclosure plan.
+A four-week IoT + AI engineering portfolio. Week 4 is a complete AI-powered smart home platform using ESP32/Raspberry Pi, multi-sensor monitoring, occupancy prediction, energy optimization, real-time dashboarding, voice control, mobile notifications, encrypted communication, and deployment documentation.
 
 ## Projects
 
@@ -9,37 +9,38 @@ A four-week IoT + AI engineering portfolio. Week 4 is a complete ESP32 smart agr
 | 1 | Weather Monitoring Station | ESP32, DHT11, ThingSpeak |
 | 2 | Predictive Maintenance | Python, pandas, scikit-learn, MQTT |
 | 3 | AI Smart Doorbell | Raspberry Pi, camera, OpenCV, Python |
-| 4 | Smart Agriculture + AI | ESP32, FreeRTOS, MQTT, OLED, relay, OTA, deep sleep, Python ML |
+| 4 | AI Smart Home | ESP32/Raspberry Pi, sensors, MQTT/TLS, FreeRTOS, Python ML, dashboard, voice, notifications |
 
-## Week 4 — IoT Smart Agriculture System
+## Week 4 — AI-Powered Smart Home System
 
 ### Features
-- ESP32 soil-moisture, temperature and light monitoring
-- Automatic irrigation using a relay-controlled DC water pump
-- OLED local status display
-- Wi-Fi connectivity and MQTT cloud reporting
-- FreeRTOS tasks for sensing, display, MQTT and irrigation control
-- Deep sleep strategy for battery-powered operation
-- OTA firmware update support
-- AI-assisted irrigation recommendation using sensor history
-- PCB design, BOM and wiring documentation
-- 3D-printed enclosure plan
-- Testing, deployment and troubleshooting documentation
+- Temperature, motion, light and sound sensing
+- ESP32 sensor nodes with Raspberry Pi edge gateway option
+- AI occupancy prediction from sensor history
+- AI energy optimization recommendations
+- Real-time MQTT dashboard with room/device status
+- Voice-control integration through a local command interface
+- Mobile notification workflow for important events
+- Encrypted MQTT/TLS communication and credential separation
+- FreeRTOS multitasking on ESP32
+- OTA firmware update strategy
+- Deployment, testing, architecture and security documentation
 
 ## Architecture
 
 ```text
- Soil Moisture ─┐
- Temperature ───┼──> ESP32 ──> MQTT Broker / Cloud
- Light Sensor ──┘      │
-                       ├──> OLED Display
-                       ├──> Relay ──> Water Pump
-                       ├──> OTA Firmware
-                       └──> AI Irrigation Recommendation
+ Temperature ─┐
+ Motion ──────┤
+ Light ───────┼──> ESP32 Sensor Node ──MQTT/TLS──> Raspberry Pi Edge Gateway
+ Sound ───────┘                                      │
+                                                     ├──> AI Occupancy Model
+                                                     ├──> AI Energy Optimizer
+                                                     ├──> Real-time Dashboard
+                                                     ├──> Voice Control
+                                                     └──> Mobile Notifications
 
-          FreeRTOS task scheduler
-                       │
-                  Deep Sleep
+                    FreeRTOS tasks on ESP32
+                    Sensors | MQTT | Health | OTA
 ```
 
 ## Repository structure
@@ -48,17 +49,20 @@ A four-week IoT + AI engineering portfolio. Week 4 is a complete ESP32 smart agr
 Week-1-Weather-Monitoring-Station/
 Week-2-Predictive-Maintenance/
 Week-3-Smart-Doorbell/
-Week-4-Smart-Agriculture/
-├── firmware/esp32-smart-agriculture/
+Week-4-Smart-Home/
+├── firmware/esp32-smart-home/
+├── edge/raspberry-pi/
 ├── ai/
-├── mqtt/
+├── dashboard/
+├── voice/
+├── notifications/
+├── security/
 ├── hardware/
-├── enclosure/
 ├── docs/
 └── tests/
 ```
 
-Secrets such as Wi-Fi passwords, MQTT credentials, API keys and OTA passwords must never be committed. Use environment variables or a local `config.h` excluded by `.gitignore`.
+Secrets such as Wi-Fi passwords, MQTT credentials, API keys, certificates and notification tokens must never be committed. Use local environment variables/configuration excluded by `.gitignore`.
 
-## Safety
-Use isolated low-voltage electronics and an appropriately rated DC pump/relay. Never connect prototype ESP32 GPIO pins directly to mains voltage. Use suitable fusing, flyback protection and power isolation for the pump circuit.
+## Safety and security
+Use low-voltage prototype electronics and appropriately rated power supplies. Keep device credentials private, validate commands at the edge, use TLS for network traffic, and fail to a safe device state when connectivity or AI inference is unavailable.
