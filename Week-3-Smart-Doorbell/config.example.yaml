@@ -1,0 +1,23 @@
+camera:
+  index: 0
+  width: 1280
+  height: 720
+  face_confidence: 0.60
+
+classifier:
+  model_path: model/visitor_classifier.tflite
+  confidence_threshold: 0.70
+
+storage:
+  database: data/events.db
+  snapshots: data/snapshots
+  retention_days: 30
+
+notification:
+  enabled: false
+  webhook_url: ""
+  timeout_seconds: 10
+
+dashboard:
+  host: 0.0.0.0
+  port: 5000
